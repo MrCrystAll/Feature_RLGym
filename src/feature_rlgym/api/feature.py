@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import Any, Generic
 
 from rlgym.api import AgentID, ObsType, StateType, ActionType, ObsSpaceType

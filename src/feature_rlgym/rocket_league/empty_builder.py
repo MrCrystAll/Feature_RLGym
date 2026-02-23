@@ -1,3 +1,5 @@
+"""The module for an empty obs builder"""
+
 from collections.abc import Hashable
 from typing import Any, Dict, List
 
@@ -7,6 +9,11 @@ from rlgym.rocket_league.api import GameState
 
 
 class EmptyBuilder(ObsBuilder[Hashable, np.ndarray, GameState, int]):
+    """A builder that does nothing...
+
+    Yes. Nothing.
+    """
+
     def build_obs(
         self, agents: List[Hashable], state: GameState, shared_info: Dict[str, Any]
     ) -> Dict[Hashable, np.ndarray]:

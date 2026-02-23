@@ -41,4 +41,13 @@ class FeatureConfig(
 
 
 def create_config(obs_builder: ObsBuilder, act_parser: ActionParser) -> FeatureConfig:
+    """Creates a config with your obs builder and action parser
+
+    :param obs_builder: Your obs builder
+    :type obs_builder: ObsBuilder
+    :param act_parser: Your action parser
+    :type act_parser: ActionParser
+    :return: A config where you can add features
+    :rtype: FeatureConfig
+    """
     return FeatureConfig(obs_builder, act_parser)

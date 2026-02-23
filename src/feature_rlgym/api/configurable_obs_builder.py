@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import Any, Dict, Generic, List, Self
 
 from rlgym.api import ObsBuilder, AgentID, StateType, ObsType, ObsSpaceType
@@ -10,6 +9,8 @@ class ConfigurableObsBuilder(
     Generic[AgentID, ObsType, StateType, ObsSpaceType],
     ObsBuilder[AgentID, ObsType, StateType, ObsSpaceType],
 ):
+    """An observation builder where you can add features"""
+
     def __init__(
         self, obs_builder: ObsBuilder[AgentID, ObsType, StateType, ObsSpaceType]
     ) -> None:
@@ -62,9 +63,8 @@ class ConfigurableObsBuilder(
     def get_obs_space(self, agent: AgentID) -> ObsSpaceType:
         _base_space = self._obs_builder.get_obs_space(agent)
 
-        for _feature in self.features:
-            _feature_space = _feature.get_obs_additional_size(agent)
-
-            _base_space += _feature_space
+        _base_space += sum(
+            map(lambda feat: feat.get_obs_additional_size(agent), self.features)
+        )
 
         return _base_space

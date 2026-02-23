@@ -1,13 +1,15 @@
+"""The module for the self add feature"""
+
 from collections.abc import Hashable
 import math
 from typing import Any
 
 import numpy as np
 
-from feature_rlgym.api.feature import Feature
 from rlgym.rocket_league.api import GameState
 from rlgym.rocket_league.common_values import ORANGE_TEAM
 
+from feature_rlgym.api.feature import Feature
 from feature_rlgym.api.feature_config import FeatureConfig
 
 
@@ -62,6 +64,17 @@ def add_self_feature(
     linear_velocity_normalization: float | np.ndarray = 1 / 2300,
     angular_velocity_normalization: float | np.ndarray = 1 / math.pi,
 ):
+    """Adds a feature to add the player to the obs
+
+    :param config: The config to add the feature on
+    :type config: FeatureConfig
+    :param position_normalization: Position normalization coefficient, defaults to 1/2300
+    :type position_normalization: float | np.ndarray, optional
+    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :type linear_velocity_normalization: float | np.ndarray, optional
+    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :type angular_velocity_normalization: float | np.ndarray, optional
+    """
     config.obs_builder.add_feature(
         FeatureSelf(
             position_normalization,

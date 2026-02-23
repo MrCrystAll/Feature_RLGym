@@ -1,14 +1,15 @@
+"""The module for the feature to add others to the obs"""
+
 from collections.abc import Hashable
 import math
 from typing import Any
 
 import numpy as np
 
-from feature_rlgym.api.feature import Feature
-
 from rlgym.rocket_league.api import Car, GameState
 from rlgym.rocket_league.common_values import ORANGE_TEAM
 
+from feature_rlgym.api.feature import Feature
 from feature_rlgym.api.feature_config import FeatureConfig
 
 

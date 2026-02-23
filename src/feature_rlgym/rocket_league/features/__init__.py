@@ -1,3 +1,5 @@
+"""The module containing all the features for Rocket League"""
+
 from .feature_ball import add_ball_feature
 from .feature_self import add_self_feature
 from .feature_boost_pads import add_boost_pad_timers_feature

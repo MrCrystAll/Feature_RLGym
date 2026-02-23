@@ -1,13 +1,15 @@
+"""The module for the boost pads features"""
+
 from collections.abc import Hashable
 from typing import Any
 
 import numpy as np
 
-from feature_rlgym.api.feature import Feature
-from feature_rlgym.api.feature_config import FeatureConfig
-
 from rlgym.rocket_league.api import GameState
 from rlgym.rocket_league.common_values import ORANGE_TEAM, BOOST_LOCATIONS
+
+from feature_rlgym.api.feature import Feature
+from feature_rlgym.api.feature_config import FeatureConfig
 
 
 class FeatureBoostPadTimers(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
