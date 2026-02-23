@@ -1,45 +1,31 @@
-import time
+from feature_rlgym.rocket_league.features.feature_ball import add_ball_feature
 
-import numpy as np
-
-from feature_rlgym.api.feature_config import create_config
-from feature_rlgym.rocket_league.empty_builder import EmptyBuilder
-
-from rlgym.rocket_league.action_parsers import LookupTableAction
-from rlgym.rocket_league.reward_functions import TouchReward
-from rlgym.rocket_league.done_conditions import GoalCondition, NoopCondition
-from rlgym.rocket_league.sim import RocketSimEngine
-from rlgym.rocket_league.state_mutators import (
-    FixedTeamSizeMutator,
-    MutatorSequence,
-)
-
-from rlgym.api import RLGym
-
-from rlgym_tools.rocket_league.renderers.rocketsimvis_renderer import (
-    RocketSimVisRenderer,
-)
-from rlgym_tools.rocket_league.state_mutators.random_physics_mutator import (
-    RandomPhysicsMutator,
-)
-
-from feature_rlgym.rocket_league.features import (
-    add_ball_feature,
-    add_self_feature,
-    add_boost_pad_timers_feature,
-    add_others_feature,
-)
 
 if __name__ == "__main__":
-    obs_builder = EmptyBuilder()
-    act_parser = LookupTableAction()
+    import time
 
-    config = create_config(obs_builder, act_parser)
+    import numpy as np
 
-    add_ball_feature(config)
-    add_self_feature(config)
-    add_boost_pad_timers_feature(config)
-    add_others_feature(config)
+    from rlgym.rocket_league.reward_functions import TouchReward
+    from rlgym.rocket_league.done_conditions import GoalCondition, NoopCondition
+    from rlgym.rocket_league.sim import RocketSimEngine
+    from rlgym.rocket_league.state_mutators import (
+        FixedTeamSizeMutator,
+        MutatorSequence,
+    )
+
+    from rlgym.api import RLGym
+
+    from rlgym_tools.rocket_league.renderers.rocketsimvis_renderer import (
+        RocketSimVisRenderer,
+    )
+    from rlgym_tools.rocket_league.state_mutators.random_physics_mutator import (
+        RandomPhysicsMutator,
+    )
+
+    from feature_rlgym.rocket_league.empty_builder import create_default_config
+    
+    config = create_default_config()
 
     env = RLGym(
         obs_builder=config.obs_builder,
@@ -49,7 +35,7 @@ if __name__ == "__main__":
         truncation_cond=NoopCondition(),
         transition_engine=RocketSimEngine(),
         state_mutator=MutatorSequence(
-            FixedTeamSizeMutator(3, 3), RandomPhysicsMutator()
+            FixedTeamSizeMutator(2, 2), RandomPhysicsMutator()
         ),
         renderer=RocketSimVisRenderer(),
     )
