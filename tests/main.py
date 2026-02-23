@@ -20,8 +20,8 @@ if __name__ == "__main__":
         RandomPhysicsMutator,
     )
 
-    from feature_rlgym.rocket_league import create_default_config
-    from feature_rlgym.rocket_league.features import add_ball_pred_feature
+    from features_rlgym.rocket_league import create_default_config
+    from features_rlgym.rocket_league.features import add_ball_pred_feature
 
     config = create_default_config()
 

@@ -12,8 +12,8 @@ from rlgym.api import (
     ActionParser,
 )
 
-from feature_rlgym.api.configurable_obs_builder import ConfigurableObsBuilder
-from feature_rlgym.api.configurable_shared_info_provider import (
+from features_rlgym.api.configurable_obs_builder import ConfigurableObsBuilder
+from features_rlgym.api.configurable_shared_info_provider import (
     ConfigurableSharedInfoProvider,
 )
 

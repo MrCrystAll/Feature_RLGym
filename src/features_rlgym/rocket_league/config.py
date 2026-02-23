@@ -1,6 +1,6 @@
 """Basic configurations for Rocket League"""
 
-from feature_rlgym.api.feature_config import FeatureConfig
+from features_rlgym.api.feature_config import FeatureConfig
 
 
 def create_config() -> FeatureConfig:
@@ -9,9 +9,9 @@ def create_config() -> FeatureConfig:
     :return: The default config
     :rtype: FeatureConfig
     """
-    from feature_rlgym.api import create_config as api_create_config
+    from features_rlgym.api import create_config as api_create_config
 
-    from feature_rlgym.rocket_league.empty_builder import EmptyBuilder
+    from features_rlgym.rocket_league.empty_builder import EmptyBuilder
     from rlgym.rocket_league.action_parsers import RepeatAction, LookupTableAction
 
     return api_create_config(EmptyBuilder(), RepeatAction(LookupTableAction()))
@@ -25,7 +25,7 @@ def create_default_config(zero_padding: int = 3) -> FeatureConfig:
     :return: The default config
     :rtype: FeatureConfig
     """
-    from feature_rlgym.rocket_league.features import (
+    from features_rlgym.rocket_league.features import (
         add_ball_feature,
         add_self_feature,
         add_others_feature,

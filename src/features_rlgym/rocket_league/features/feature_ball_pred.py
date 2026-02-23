@@ -14,8 +14,8 @@ from rlgym_tools.rocket_league.shared_info_providers.ball_prediction_provider im
 
 import RocketSim as rs
 
-from feature_rlgym.api.feature import Feature
-from feature_rlgym.api.feature_config import FeatureConfig
+from features_rlgym.api.feature import Feature
+from features_rlgym.api.feature_config import FeatureConfig
 
 
 class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):

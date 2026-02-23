@@ -4,7 +4,7 @@ from typing import Any, Dict, Generic, List
 
 from rlgym.api import SharedInfoProvider, AgentID, StateType
 
-from feature_rlgym.api.feature import Feature
+from features_rlgym.api.feature import Feature
 
 
 class ConfigurableSharedInfoProvider(
