@@ -1,6 +1,3 @@
-from feature_rlgym.rocket_league.features.feature_ball import add_ball_feature
-
-
 if __name__ == "__main__":
     import time
 
@@ -23,9 +20,12 @@ if __name__ == "__main__":
         RandomPhysicsMutator,
     )
 
-    from feature_rlgym.rocket_league.empty_builder import create_default_config
-    
+    from feature_rlgym.rocket_league import create_default_config
+    from feature_rlgym.rocket_league.features import add_ball_pred_feature
+
     config = create_default_config()
+
+    add_ball_pred_feature(config)
 
     env = RLGym(
         obs_builder=config.obs_builder,
@@ -38,6 +38,7 @@ if __name__ == "__main__":
             FixedTeamSizeMutator(2, 2), RandomPhysicsMutator()
         ),
         renderer=RocketSimVisRenderer(),
+        shared_info_provider=config.shared_info_provider,
     )
 
     running = True

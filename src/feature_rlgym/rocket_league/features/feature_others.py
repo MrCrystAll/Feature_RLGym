@@ -59,7 +59,7 @@ class FeatureOthers(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
         for agent, _obs in obs.items():
             _agent_car = state.cars[agent]
             _inverted = _agent_car.team_num == ORANGE_TEAM
-            
+
             _self_obs = self._generate_player_obs(_agent_car, _inverted)
 
             _teammates = []
@@ -80,7 +80,7 @@ class FeatureOthers(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
                     _teammates.append(np.zeros_like(_self_obs))
                 while len(_opponents) < self.zero_padding:
                     _opponents.append(np.zeros_like(_self_obs))
-                    
+
             if self._shuffle:
                 random.shuffle(_teammates)
                 random.shuffle(_opponents)

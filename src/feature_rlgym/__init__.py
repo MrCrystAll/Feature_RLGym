@@ -1,3 +1,3 @@
-from . import api
+from . import api, rocket_league
 
-__all__ = ["api"]
+__all__ = ["api", "rocket_league"]

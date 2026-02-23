@@ -13,6 +13,9 @@ from rlgym.api import (
 )
 
 from feature_rlgym.api.configurable_obs_builder import ConfigurableObsBuilder
+from feature_rlgym.api.configurable_shared_info_provider import (
+    ConfigurableSharedInfoProvider,
+)
 
 
 class FeatureConfig(
@@ -38,6 +41,8 @@ class FeatureConfig(
 
         self._base_action_parser = action_parser
         self.action_parser = action_parser
+
+        self.shared_info_provider = ConfigurableSharedInfoProvider()
 
 
 def create_config(obs_builder: ObsBuilder, act_parser: ActionParser) -> FeatureConfig:

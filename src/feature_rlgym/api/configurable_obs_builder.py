@@ -1,4 +1,6 @@
-from typing import Any, Dict, Generic, List, Self
+"""The module of the configurable obs builder"""
+
+from typing import Any, Dict, Generic, List
 
 from rlgym.api import ObsBuilder, AgentID, StateType, ObsType, ObsSpaceType
 
@@ -48,17 +50,13 @@ class ConfigurableObsBuilder(
             shared_info,
         )
 
-    def add_feature(self, feature: Feature) -> Self:
+    def add_feature(self, feature: Feature):
         """Adds a feature to the obs builder
 
         :param feature: The feature to add
         :type feature: Feature
-        :return: The obs builder
-        :rtype: Self
         """
         self.features.append(feature)
-
-        return self
 
     def get_obs_space(self, agent: AgentID) -> ObsSpaceType:
         _base_space = self._obs_builder.get_obs_space(agent)
