@@ -1,7 +1,7 @@
 [project]
 name = "features-rlgym-rocket-league"
 version = "0.1.0"
-dependencies = ["features-rlgym-api", "rlgym[rl]"]
+dependencies = ["features-rlgym-api", "rlgym[rl]", "rlgym-tools"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
