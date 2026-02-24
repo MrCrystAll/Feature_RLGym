@@ -49,13 +49,12 @@ jobs:
           pattern: pylint_*
           merge-multiple: true
       - uses: actions/checkout@v4
-      - name: "Update badges"
-        run: |
+        name: "Update badges"
+        with:
+          ref: ${{ github.head_ref }}
+      - run: |
           git config user.name "Badge Updater Bot"
           git config user.email "<>"
-          git config pull.rebase false
-
-          git pull origin ${{github.head_ref}}
 
           mv /tmp/badges badges
 
