@@ -48,9 +48,7 @@ class FeatureSelf(Feature[Hashable, np.ndarray, Any, GameState, int]):
                 _physics.up,
             ]
 
-            _new_obs[_agent] = np.concatenate(
-                (_existing_obs, *_added_obs), dtype=_existing_obs.dtype
-            )
+            _new_obs[_agent] = np.concatenate((_existing_obs, *_added_obs))
 
         return _new_obs
 

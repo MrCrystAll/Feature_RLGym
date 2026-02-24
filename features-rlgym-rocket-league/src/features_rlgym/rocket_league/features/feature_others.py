@@ -92,9 +92,7 @@ class FeatureOthers(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
                 (len(_opponents) * self.PLAYER_SIZE,)
             )
 
-            _new_obs[agent] = np.concatenate(
-                (_obs, _np_teammates, _np_opponents), dtype=_obs.dtype
-            )
+            _new_obs[agent] = np.concatenate((_obs, _np_teammates, _np_opponents))
 
         return _new_obs
 

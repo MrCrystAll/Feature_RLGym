@@ -50,7 +50,7 @@ class FeatureBall(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
                 _ball.angular_velocity * self.ang_vel_coef,
             ]
 
-            _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
+            _new_obs[agent] = np.concatenate((_obs, *_added_obs))
 
         return _new_obs
 

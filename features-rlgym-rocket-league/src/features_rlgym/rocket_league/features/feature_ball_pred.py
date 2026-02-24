@@ -97,7 +97,7 @@ class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState,
                     ]
                 )
 
-            _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
+            _new_obs[agent] = np.concatenate((_obs, *_added_obs))
 
         return _new_obs
 

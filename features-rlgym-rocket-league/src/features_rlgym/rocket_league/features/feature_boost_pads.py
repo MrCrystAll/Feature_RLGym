@@ -41,7 +41,7 @@ class FeatureBoostPadTimers(Feature[Hashable, np.ndarray, np.ndarray, GameState,
 
             _added_obs = [_pads]
 
-            _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
+            _new_obs[agent] = np.concatenate((_obs, *_added_obs))
 
         return _new_obs
 
