@@ -23,6 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         cd features-rlgym
         pip install .[all] pylint
+        ls $(python -c "import features_rlgym.api; import os; print(os.path.join(features_rlgym.api.__file__, '..', '..'))")
+      
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint .\features-rlgym\ .\features-rlgym-api\ .\features-rlgym-rocket-league\
