@@ -2,6 +2,8 @@
 
 This package is here to simplify the addition of features such as ball prediction. The idea is to create an object that automatically adds to whatever component of the environment.
 
+![Pylint badge](badges/pylint_3.12.svg)
+
 ## Installation
 
 | Module        	| Usage                                                                    	| Documentation                                           	|

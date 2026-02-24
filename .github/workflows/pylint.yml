@@ -22,8 +22,35 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         cd features-rlgym
-        pip install .[all] pylint
+        pip install .[all] pylint anybadge
       
     - name: Analysing the code with pylint
       run: |
-        pylint features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5
+        pylint --output-format=text features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5 | tee ./pylint/pylint.log || pylint-exit $?
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./pylint/pylint.log)
+        anybadge -l pylint -v $PYLINT_SCORE -f badges/pylint_${{matrix.python-version}}.svg
+
+    - uses: actions/upload-artifacts@v6
+      name: Upload badges
+      with:
+        name: all_badges
+        path: badges/
+
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifacts@v7
+        with: 
+          name: all_badges
+      - name: "Update badges"
+        run: |
+          git config user.name "Badge Updater Bot"
+          git config user.email "<>"
+
+          git add badges/
+          git commit -m "Update badges"
+          git push
+
+        
+        
