@@ -56,7 +56,7 @@ jobs:
 
           mv /tmp/badges badges
 
-          git pull origin ${{github.head_ref}}
+          git pull ${{github.head_ref}}
 
           git add badges/
           git commit -m "Update badges"
