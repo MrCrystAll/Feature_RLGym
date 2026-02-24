@@ -23,7 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         cd features-rlgym
         pip install .[all] pylint
-        ls $(python -c "import features_rlgym.api; import os; print(os.path.join(features_rlgym.api.__file__, '..', '..'))")
+        ls -l /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/features_rlgym
       
     - name: Analysing the code with pylint
       run: |
