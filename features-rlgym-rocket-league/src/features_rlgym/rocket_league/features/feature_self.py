@@ -68,9 +68,11 @@ def add_self_feature(
     :type config: FeatureConfig
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
-    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :param linear_velocity_normalization: Linear velocity normalization
+        coefficient, defaults to 1/2300
     :type linear_velocity_normalization: float | np.ndarray, optional
-    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :param angular_velocity_normalization: Angular velocity normalization
+        coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
     """
     config.obs_builder.add_feature(

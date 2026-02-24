@@ -1,3 +1,5 @@
+"""This is the module for the feature config and config creation"""
+
 from typing import Generic
 
 from rlgym.api import (
@@ -29,6 +31,11 @@ class FeatureConfig(
         StateType,
     ]
 ):
+    """A feature config contains the altered obs builder,
+    action parser and shared info provider,
+    it is used to store and redistribute the modified components
+    """
+
     def __init__(
         self,
         obs_builder: ObsBuilder[AgentID, ObsType, StateType, ObsSpaceType],

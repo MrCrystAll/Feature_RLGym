@@ -34,6 +34,20 @@ class ConfigurableObsBuilder(
         state: StateType,
         shared_info: dict[str, Any],
     ) -> dict[AgentID, ObsType]:
+        """This function is being triggered once the "main" obs builder finished building
+        the observations, it adds info after the creation
+
+        :param agents: The agents used to build the observations
+        :type agents: list[AgentID]
+        :param existing_obs: The created observations
+        :type existing_obs: dict[AgentID, ObsType]
+        :param state: The state the observations were created on
+        :type state: StateType
+        :param shared_info: The shared info of the environment
+        :type shared_info: dict[str, Any]
+        :return: The new modified observations
+        :rtype: dict[AgentID, ObsType]
+        """
         for feature in self.features:
             existing_obs = feature.apply_to_observation_builder(
                 existing_obs, state, shared_info

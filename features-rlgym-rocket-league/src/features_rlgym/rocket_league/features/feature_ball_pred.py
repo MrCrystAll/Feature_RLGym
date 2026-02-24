@@ -120,15 +120,18 @@ def add_ball_pred_feature(
     :type limit_seconds: float | int, optional
     :param step_seconds: The duration in between 2 predictions (in seconds), defaults to 1
     :type step_seconds: float | int, optional
-    :param target_seconds: The targetted duration of the prediction (what the bot will see), defaults to 4
+    :param target_seconds: The targetted duration of the prediction
+        (what the bot will see), defaults to 4
     :type target_seconds: float | int | slice, optional
     :param gamemode: _description_, defaults to rs.GameMode.SOCCAR
     :type gamemode: int, optional
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
-    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :param linear_velocity_normalization: Linear velocity normalization
+        coefficient, defaults to 1/2300
     :type linear_velocity_normalization: float | np.ndarray, optional
-    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :param angular_velocity_normalization: Angular velocity normalization
+        coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
     """
     feature = FeatureBallPrediction(

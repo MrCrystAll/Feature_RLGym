@@ -1,8 +1,13 @@
-# features_rlgym/__init__.py
+"""This module is the global package of features_rlgym,
+it is mainly used to guide the user in case they forgot
+to install a dependency and try to access it"""
+
 import importlib
 
 
 class MissingModule:
+    """A little class to simplify the detection of a missing module"""
+
     def __init__(self, name):
         self._name = name
 

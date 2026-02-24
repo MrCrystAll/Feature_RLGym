@@ -109,10 +109,24 @@ class FeatureOthers(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
         ]
 
     def pad_per_team(self, zero_padding: int = 3) -> Self:
+        """Pads the teams with for a maximum of "zero_padding" elements
+
+        :param zero_padding: The max amount of players per team, defaults to 3
+        :type zero_padding: int, optional
+        :return: The feature itself
+        :rtype: Self
+        """
         self.zero_padding = zero_padding
         return self
 
-    def shuffle(self, shuffle: bool) -> Self:
+    def shuffle(self, shuffle: bool = True) -> Self:
+        """Shuffles the members of a team within the team
+
+        :param shuffle: Whether to shuffle the team members, defaults to True
+        :type shuffle: bool
+        :return: The feature itself
+        :rtype: Self
+        """
         self._shuffle = shuffle
         return self
 
@@ -131,9 +145,11 @@ def add_others_feature(
     :type config: FeatureConfig
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
-    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :param linear_velocity_normalization: Linear velocity normalization
+        coefficient, defaults to 1/2300
     :type linear_velocity_normalization: float | np.ndarray, optional
-    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :param angular_velocity_normalization: Angular velocity normalization
+        coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
     :param zero_padding: The amount of padding per team, defaults to 0 (no padding)
     :type zero_padding: int, optional
