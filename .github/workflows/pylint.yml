@@ -33,16 +33,18 @@ jobs:
     - uses: actions/upload-artifact@v6
       name: Upload badges
       with:
-        name: all_badges
-        path: badges/
+        name: pylint_${{matrix.python-version}}
+        path: badges/pylint_${{matrix.python-version}}.svg
 
   update:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v7
-        with: 
-          name: all_badges
+        with:
+          path: badges
+          pattern: pylint_*
       - name: "Update badges"
         run: |
           git config user.name "Badge Updater Bot"
