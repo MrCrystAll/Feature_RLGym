@@ -21,17 +21,28 @@ from features_rlgym.api.feature_config import FeatureConfig
 class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
     """A feature to add the ball in the obs builder"""
 
+    BALL_PRED_SIZE = 9
+
     def __init__(
         self,
-        limit_seconds,
-        step_seconds,
-        target_seconds: float | int,
+        limit_seconds: float | int,
+        step_seconds: float | int,
+        target_seconds: float | int | slice,
         game_mode=rs.GameMode.SOCCAR,
         position_normalization: float | np.ndarray = 1 / 2300,
         linear_velocity_normalization: float | np.ndarray = 1 / 2300,
         angular_velocity_normalization: float | np.ndarray = 1 / math.pi,
     ) -> None:
-        self._target_seconds = int(target_seconds) // int(step_seconds)
+        if isinstance(target_seconds, slice):
+            self._target_seconds = slice(
+                int(target_seconds.start) // int(step_seconds),
+                int(target_seconds.stop) // int(step_seconds),
+            )
+        else:
+            self._target_seconds = slice(
+                int(target_seconds) // int(step_seconds),
+                int(target_seconds) // int(step_seconds),
+            )
         self.pos_coef = position_normalization
         self.lin_vel_coef = linear_velocity_normalization
         self.ang_vel_coef = angular_velocity_normalization
@@ -58,7 +69,9 @@ class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState,
         )
 
     def get_obs_additional_size(self, agent: Hashable) -> int:
-        return 9
+        return (
+            self._target_seconds.stop - self._target_seconds.start
+        ) * self.BALL_PRED_SIZE
 
     def apply_to_observation_builder(
         self,
@@ -69,15 +82,20 @@ class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState,
         _new_obs = {}
 
         for agent, _obs in obs.items():
-            _ball_pred: PhysicsObject = shared_info["ball_prediction"][
+            _ball_pred: list[PhysicsObject] = shared_info["ball_prediction"][
                 self._target_seconds
             ]
 
-            _added_obs = [
-                _ball_pred.position * self.pos_coef,
-                _ball_pred.linear_velocity * self.lin_vel_coef,
-                _ball_pred.angular_velocity * self.ang_vel_coef,
-            ]
+            _added_obs = []
+
+            for _bp in _ball_pred:
+                _added_obs.extend(
+                    [
+                        _bp.position * self.pos_coef,
+                        _bp.linear_velocity * self.lin_vel_coef,
+                        _bp.angular_velocity * self.ang_vel_coef,
+                    ]
+                )
 
             _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
 
@@ -88,7 +106,7 @@ def add_ball_pred_feature(
     config: FeatureConfig,
     limit_seconds: int = 5,
     step_seconds: int = 1,
-    target_seconds: int = 4,
+    target_seconds: int | slice = 4,
     gamemode: int = rs.GameMode.SOCCAR,
     position_normalization: float | np.ndarray = 1 / 2300,
     linear_velocity_normalization: float | np.ndarray = 1 / 2300,
@@ -98,6 +116,14 @@ def add_ball_pred_feature(
 
     :param config: The config to add the feature on
     :type config: FeatureConfig
+    :param limit_seconds: The total amount of time to predict (in seconds), defaults to 5
+    :type limit_seconds: float | int, optional
+    :param step_seconds: The duration in between 2 predictions (in seconds), defaults to 1
+    :type step_seconds: float | int, optional
+    :param target_seconds: The targetted duration of the prediction (what the bot will see), defaults to 4
+    :type target_seconds: float | int | slice, optional
+    :param gamemode: _description_, defaults to rs.GameMode.SOCCAR
+    :type gamemode: int, optional
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
     :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
