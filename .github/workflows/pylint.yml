@@ -53,10 +53,11 @@ jobs:
         run: |
           git config user.name "Badge Updater Bot"
           git config user.email "<>"
+          git config pull.ff only
 
           mv /tmp/badges badges
 
-          git pull ${{github.head_ref}}
+          git pull origin ${{github.head_ref}}
 
           git add badges/
           git commit -m "Update badges"
