@@ -1,6 +1,6 @@
 """Basic configurations for Rocket League"""
 
-from features_rlgym.api.feature_config import FeatureConfig
+from features_rlgym.api import FeatureConfig
 
 
 def create_config() -> FeatureConfig:
