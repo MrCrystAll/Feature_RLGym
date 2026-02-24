@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "features-rlgym"
-version = "0.0.1"
+version = "0.1.0"
 description = "Some utils for easier feature integration"
 readme = "README.md"
 authors = [
