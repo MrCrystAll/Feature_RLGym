@@ -26,8 +26,8 @@ jobs:
       
     - name: Analysing the code with pylint
       run: |
-        pylint --output-format=text features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5 | tee ./pylint/pylint.log || pylint-exit $?
-        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./pylint/pylint.log)
+        pylint --output-format=text --output=pylint.log features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
         anybadge -l pylint -v $PYLINT_SCORE -f badges/pylint_${{matrix.python-version}}.svg
 
     - uses: actions/upload-artifact@v6
