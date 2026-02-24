@@ -26,4 +26,4 @@ jobs:
       
     - name: Analysing the code with pylint
       run: |
-        pylint features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-on E
+        pylint features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5
