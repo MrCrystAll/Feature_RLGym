@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v7
         with:
-          path: badges
+          path: /tmp/badges
           pattern: pylint_*
           merge-multiple: true
       - uses: actions/checkout@v4
@@ -53,6 +53,8 @@ jobs:
         run: |
           git config user.name "Badge Updater Bot"
           git config user.email "<>"
+
+          mv /tmp/badges badges
 
           git add badges/
           git commit -m "Update badges"
