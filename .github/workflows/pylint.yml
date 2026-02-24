@@ -23,8 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         cd features-rlgym
         pip install .[all] pylint
-        ls -l /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/features_rlgym
       
     - name: Analysing the code with pylint
       run: |
-        pylint .\features-rlgym\ .\features-rlgym-api\ .\features-rlgym-rocket-league\
+        pylint features-rlgym features-rlgym-api features-rlgym-rocket-league
