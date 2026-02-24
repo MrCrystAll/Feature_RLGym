@@ -45,11 +45,13 @@ jobs:
         with:
           path: badges
           pattern: pylint_*
+          merge-multiple: true
       - name: "Update badges"
         run: |
           git config user.name "Badge Updater Bot"
           git config user.email "<>"
 
+          git pull
           git add badges/
           git commit -m "Update badges"
           git push
