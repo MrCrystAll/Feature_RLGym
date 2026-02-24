@@ -56,7 +56,7 @@ jobs:
           git config user.name "Badge Updater Bot"
           git config user.email "<>"
 
-          mv /tmp/badges .
+          mv /tmp/badges/* badges/
 
           git add badges/
           git commit -m "Update badges"
