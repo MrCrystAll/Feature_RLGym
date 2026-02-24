@@ -29,6 +29,7 @@ jobs:
       
     - name: Analysing the code with pylint
       run: |
+        rm -r badges/pylint_*
         pylint --output-format=text --output=pylint.log features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5
         PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
         anybadge -l pylint -v $PYLINT_SCORE -f badges/pylint_${{matrix.python-version}}.svg
