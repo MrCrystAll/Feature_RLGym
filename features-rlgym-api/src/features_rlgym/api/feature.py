@@ -1,3 +1,5 @@
+"""The module of the Feature base class"""
+
 from typing import Any, Generic
 
 from rlgym.api import AgentID, ObsType, StateType, ActionType, ObsSpaceType
@@ -66,3 +68,48 @@ class Feature(Generic[AgentID, ObsType, ActionType, StateType, ObsSpaceType]):
         :rtype: dict[AgentID, ActionType]
         """
         return actions
+
+    def create_shared_info(self, shared_info: dict[str, Any]) -> dict[str, Any]:
+        """This function is called during the shared info creation
+
+        :param shared_info: The previous shared information dictionary
+        :type shared_info: dict[str, Any]
+        :return: The modified shared information dictionary
+        :rtype: dict[str, Any]
+        """
+        return shared_info
+
+    def reset_shared_info(
+        self,
+        agents: list[AgentID],
+        initial_state: StateType,
+        shared_info: dict[str, Any],
+    ) -> dict[str, Any]:
+        """This function is called during the shared info reset / set_state
+
+        :param agents: List of AgentIDs for which this SharedInfoProvider will manage the SharedInfo
+        :type agents: list[AgentID]
+        :param initial_state: The initial state of the environment
+        :type initial_state: StateType
+        :param shared_info: The previous shared information dictionary
+        :type shared_info: dict[str, Any]
+        :return: The modified shared information dictionary
+        :rtype: dict[str, Any]
+        """
+        return shared_info
+
+    def step_shared_info(
+        self, agents: list[AgentID], state: StateType, shared_info: dict[str, Any]
+    ) -> dict[str, Any]:
+        """This function is called during the shared info step / update
+
+        :param agents: List of AgentIDs for which this SharedInfoProvider should manage the SharedInfo
+        :type agents: list[AgentID]
+        :param state: The new state of the environment
+        :type state: StateType
+        :param shared_info: The previous shared information dictionary
+        :type shared_info: dict[str, Any]
+        :return: The modified shared information dictionary
+        :rtype: dict[str, Any]
+        """
+        return shared_info

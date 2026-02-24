@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "features-rlgym"
+version = "0.1.0"
+description = "Some utils for easier feature integration"
+readme = "README.md"
+authors = [
+    { name = "Mathieu Suchet", email = "msuchet63@gmail.com" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = []
+# Optional: define classifiers for PyPI
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+
+
+api = [
+  "features-rlgym-api @ file:../features-rlgym-api"
+]
+
+rocket_league = [
+  "features-rlgym-rocket-league @ file:../features-rlgym-rocket-league"
+]
+
+all = [
+  "features-rlgym-api @ file:../features-rlgym-api",
+  "features-rlgym-rocket-league @ file:../features-rlgym-rocket-league"
+]
