@@ -50,7 +50,7 @@ class FeatureBall(Feature[Hashable, np.ndarray, np.ndarray, GameState, int]):
                 _ball.angular_velocity * self.ang_vel_coef,
             ]
 
-            _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
+            _new_obs[agent] = np.concatenate((_obs, *_added_obs))
 
         return _new_obs
 
@@ -67,9 +67,11 @@ def add_ball_feature(
     :type config: FeatureConfig
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
-    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :param linear_velocity_normalization: Linear velocity normalization
+        coefficient, defaults to 1/2300
     :type linear_velocity_normalization: float | np.ndarray, optional
-    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :param angular_velocity_normalization: Angular velocity normalization
+        coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
     """
     config.obs_builder.add_feature(

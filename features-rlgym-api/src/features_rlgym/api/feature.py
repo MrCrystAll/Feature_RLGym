@@ -103,7 +103,8 @@ class Feature(Generic[AgentID, ObsType, ActionType, StateType, ObsSpaceType]):
     ) -> dict[str, Any]:
         """This function is called during the shared info step / update
 
-        :param agents: List of AgentIDs for which this SharedInfoProvider should manage the SharedInfo
+        :param agents: List of AgentIDs for which
+            this SharedInfoProvider should manage the SharedInfo
         :type agents: list[AgentID]
         :param state: The new state of the environment
         :type state: StateType

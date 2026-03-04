@@ -18,9 +18,11 @@ def create_config() -> FeatureConfig:
 
 
 def create_default_config(zero_padding: int = 3) -> FeatureConfig:
-    """Creates a default config with the equivalent of the DefaultObs setup (ball, self player, padded opps and teammates and boost pads)
+    """Creates a default config with the equivalent of the DefaultObs
+    setup (ball, self player, padded opps and teammates and boost pads)
 
-    :param zero_padding: Number of max cars per team, if not 0 the obs will be zero padded, defaults to 3
+    :param zero_padding: Number of max cars per team,
+        if not 0 the obs will be zero padded, defaults to 3
     :type zero_padding: int, optional
     :return: The default config
     :rtype: FeatureConfig

@@ -97,7 +97,7 @@ class FeatureBallPrediction(Feature[Hashable, np.ndarray, np.ndarray, GameState,
                     ]
                 )
 
-            _new_obs[agent] = np.concatenate((_obs, *_added_obs), dtype=_obs.dtype)
+            _new_obs[agent] = np.concatenate((_obs, *_added_obs))
 
         return _new_obs
 
@@ -120,16 +120,39 @@ def add_ball_pred_feature(
     :type limit_seconds: float | int, optional
     :param step_seconds: The duration in between 2 predictions (in seconds), defaults to 1
     :type step_seconds: float | int, optional
-    :param target_seconds: The targetted duration of the prediction (what the bot will see), defaults to 4
+    :param target_seconds: The targetted duration of the prediction
+        (what the bot will see), defaults to 4
     :type target_seconds: float | int | slice, optional
     :param gamemode: _description_, defaults to rs.GameMode.SOCCAR
     :type gamemode: int, optional
     :param position_normalization: Position normalization coefficient, defaults to 1/2300
     :type position_normalization: float | np.ndarray, optional
-    :param linear_velocity_normalization: Linear velocity normalization coefficient, defaults to 1/2300
+    :param linear_velocity_normalization: Linear velocity normalization
+        coefficient, defaults to 1/2300
     :type linear_velocity_normalization: float | np.ndarray, optional
-    :param angular_velocity_normalization: Angular velocity normalization coefficient, defaults to 1/math.pi
+    :param angular_velocity_normalization: Angular velocity normalization
+        coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
+    
+    
+    Example
+    
+    .. code-block:: python
+    
+        from features_rlgym.rocket_league.features import add_ball_pred_feature
+    
+        obs_builder = MyObsBuilder()
+        action_parser = MyActionParser()
+        
+        config = create_config(obs_builder, action_parser)
+        add_ball_pred_feature(config)
+        
+        env = RLGym(
+            obs_builder=config.obs_builder,
+            action_parser=config.action_parser,
+            shared_info_provider=config.shared_info_provider
+            ... # Your other elements
+        )
     """
     feature = FeatureBallPrediction(
         limit_seconds,

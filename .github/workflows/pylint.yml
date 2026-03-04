@@ -1,0 +1,67 @@
+name: Pylint
+
+on:
+  pull_request:
+    branches:
+    - master
+    - dev
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        cd features-rlgym
+        pip install .[all] pylint anybadge
+      
+    - name: Analysing the code with pylint
+      run: |
+        rm -r badges/pylint_*
+        pylint --output-format=text --output=pylint.log features-rlgym features-rlgym-api features-rlgym-rocket-league --fail-under 5
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
+        anybadge -l pylint -v $PYLINT_SCORE -f badges/pylint_${{matrix.python-version}}.svg
+
+    - uses: actions/upload-artifact@v6
+      name: Upload badges
+      with:
+        name: pylint_${{matrix.python-version}}
+        path: badges/pylint_${{matrix.python-version}}.svg
+
+  update:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: /tmp/badges
+          pattern: pylint_*
+          merge-multiple: true
+      - uses: actions/checkout@v4
+        name: "Update badges"
+        with:
+          ref: ${{ github.head_ref }}
+      - run: |
+          git config user.name "Badge Updater Bot"
+          git config user.email "<>"
+
+          mv /tmp/badges/* badges/
+
+          git add badges/
+          git commit -m "Update badges" || true
+          git push
+
+        
+        
