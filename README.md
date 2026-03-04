@@ -10,3 +10,5 @@ This package is here to simplify the addition of features such as ball predictio
 |---------------	|--------------------------------------------------------------------------	|---------------------------------------------------------	|
 | api           	| If you plan on writing features for your own environment                 	| [Documentation](features-rlgym-api/README.md)           	|
 | rocket-league 	| If you plan on writing/using features for your Rocket League environment 	| [Documentation](features-rlgym-rocket-league/README.md) 	|
+
+See full documentation: [Full docs](https://feature-rlgym.readthedocs.io/en/latest/index.html)
