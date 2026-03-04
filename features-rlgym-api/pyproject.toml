@@ -2,7 +2,7 @@
 name = "features-rlgym-api"
 version = "0.1.0"
 
-dependencies = ["rlgym[api]"]
+dependencies = ["rlgym"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

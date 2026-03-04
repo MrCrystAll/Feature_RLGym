@@ -133,6 +133,26 @@ def add_ball_pred_feature(
     :param angular_velocity_normalization: Angular velocity normalization
         coefficient, defaults to 1/math.pi
     :type angular_velocity_normalization: float | np.ndarray, optional
+    
+    
+    Example
+    
+    .. code-block:: python
+    
+        from features_rlgym.rocket_league.features import add_ball_pred_feature
+    
+        obs_builder = MyObsBuilder()
+        action_parser = MyActionParser()
+        
+        config = create_config(obs_builder, action_parser)
+        add_ball_pred_feature(config)
+        
+        env = RLGym(
+            obs_builder=config.obs_builder,
+            action_parser=config.action_parser,
+            shared_info_provider=config.shared_info_provider
+            ... # Your other elements
+        )
     """
     feature = FeatureBallPrediction(
         limit_seconds,
