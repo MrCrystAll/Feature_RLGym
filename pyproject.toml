@@ -5,4 +5,4 @@ version = "0.1.0"
 dependencies = ["rlgym"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["features-rlgym-api/src"]
