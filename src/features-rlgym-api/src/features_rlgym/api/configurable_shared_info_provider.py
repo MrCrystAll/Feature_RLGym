@@ -12,10 +12,15 @@ class ConfigurableSharedInfoProvider(
 ):
     """A shared info provider where you can add features"""
 
-    def __init__(self) -> None:
+    def __init__(
+        self, shared_info_provider: SharedInfoProvider[AgentID, StateType] | None = None
+    ) -> None:
         self.features: list[Feature] = []
+        self.shared_info_provider = shared_info_provider
 
     def create(self, shared_info: Dict[str, Any]) -> Dict[str, Any]:
+        if self.shared_info_provider:
+            shared_info = self.shared_info_provider.create(shared_info)
         for feature in self.features:
             shared_info = feature.create_shared_info(shared_info)
         return shared_info
@@ -26,6 +31,10 @@ class ConfigurableSharedInfoProvider(
         initial_state: StateType,
         shared_info: Dict[str, Any],
     ) -> Dict[str, Any]:
+        if self.shared_info_provider:
+            shared_info = self.shared_info_provider.set_state(
+                agents, initial_state, shared_info
+            )
         for feature in self.features:
             shared_info = feature.reset_shared_info(agents, initial_state, shared_info)
         return shared_info
@@ -33,6 +42,8 @@ class ConfigurableSharedInfoProvider(
     def step(
         self, agents: List[AgentID], state: StateType, shared_info: Dict[str, Any]
     ) -> Dict[str, Any]:
+        if self.shared_info_provider:
+            shared_info = self.shared_info_provider.step(agents, state, shared_info)
         for feature in self.features:
             shared_info = feature.step_shared_info(agents, state, shared_info)
         return shared_info

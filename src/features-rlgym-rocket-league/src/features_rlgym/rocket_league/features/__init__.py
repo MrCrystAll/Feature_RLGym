@@ -1,10 +1,10 @@
 """The module containing all the features for Rocket League"""
 
-from .feature_ball import add_ball_feature
-from .feature_self import add_self_feature
-from .feature_boost_pads import add_boost_pad_timers_feature
-from .feature_others import add_others_feature
-from .feature_ball_pred import add_ball_pred_feature
+from .ball import add_ball_feature
+from .self import add_self_feature
+from .boost_pads import add_boost_pad_timers_feature
+from .others import add_others_feature
+from .ball_pred import add_ball_pred_feature
 
 __all__ = [
     "add_ball_feature",

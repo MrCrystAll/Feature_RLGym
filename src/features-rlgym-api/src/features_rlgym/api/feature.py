@@ -6,7 +6,15 @@ from rlgym.api import AgentID, ObsType, StateType, ActionType, ObsSpaceType
 
 
 class Feature(Generic[AgentID, ObsType, ActionType, StateType, ObsSpaceType]):
-    """A feature is used to easily add an element to a bot"""
+    """
+    A feature is an object that allows you to:
+
+    * Add or remove data from/to the observation
+    * Modify the actions outputted by the action parser
+    * Add information to the shared info
+
+    This is an inclusive list, meaning you can do all, 1 or nothing (although why would you do nothing).
+    """
 
     def on_obs_builder_reset(
         self,

@@ -62,7 +62,17 @@ def add_self_feature(
     linear_velocity_normalization: float | np.ndarray = 1 / 2300,
     angular_velocity_normalization: float | np.ndarray = 1 / math.pi,
 ):
-    """Adds a feature to add the player to the obs
+    """Adds a feature to add the player to the obs, with this, the agent can see:
+
+    * The player's position
+    * The player's velocity
+    * The player's angular veloocity
+    * The player's forward direction
+    * The player's up direction
+
+    All normalized (and inverted if on orange team) given the normalization factors (forward and up are already normalized).
+
+    "The player" refers as the car controlled by the agent.
 
     :param config: The config to add the feature on
     :type config: FeatureConfig

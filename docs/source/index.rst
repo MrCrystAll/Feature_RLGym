@@ -6,12 +6,14 @@ Welcome to Features RLGym Documentation
    :caption: Get Started
 
    guide/install
+   guide/usage
 
 .. toctree::
    :maxdepth: 1
    :caption: API Reference
 
    features_rlgym.api
+   guide/make_your_own
 
 .. toctree::
    :maxdepth: 1
