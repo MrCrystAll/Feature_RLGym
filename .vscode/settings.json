@@ -1,6 +1,6 @@
 {
   "python.analysis.extraPaths": [
-    "./features-rlgym-api/src",
-    "./features-rlgym-rocket-league/src"
+    "./src/features-rlgym-api/src",
+    "./src/features-rlgym-rocket-league/src"
   ]
 }

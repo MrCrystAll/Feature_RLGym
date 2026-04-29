@@ -17,7 +17,9 @@ class ConfigurableObsBuilder(
         self, obs_builder: ObsBuilder[AgentID, ObsType, StateType, ObsSpaceType]
     ) -> None:
         self._obs_builder = obs_builder
-        self.features: list[Feature] = []
+        self.features: list[
+            Feature[AgentID, ObsType, Any, StateType, ObsSpaceType]
+        ] = []
 
     def reset(
         self,
@@ -75,8 +77,18 @@ class ConfigurableObsBuilder(
     def get_obs_space(self, agent: AgentID) -> ObsSpaceType:
         _base_space = self._obs_builder.get_obs_space(agent)
 
-        _base_space += sum(
+        _obs_shapes = list(
             map(lambda feat: feat.get_obs_additional_size(agent), self.features)
         )
 
+        _idx = 0
+
+        try:
+            for _shape in _obs_shapes:
+                _base_space += _shape
+                _idx += 1
+        except TypeError as e:
+            raise TypeError(
+                f"The type {type(_obs_shapes[_idx]).__name__} can't be added to {type(_base_space).__name__}, please convert your obs space to an additionable shape."
+            ) from e
         return _base_space

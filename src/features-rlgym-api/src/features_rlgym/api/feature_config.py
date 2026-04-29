@@ -12,6 +12,7 @@ from rlgym.api import (
     StateType,
     ObsBuilder,
     ActionParser,
+    SharedInfoProvider,
 )
 
 from features_rlgym.api.configurable_obs_builder import ConfigurableObsBuilder
@@ -42,6 +43,7 @@ class FeatureConfig(
         action_parser: ActionParser[
             AgentID, ActionType, EngineActionType, StateType, ActionSpaceType
         ],
+        shared_info_provider: SharedInfoProvider[AgentID, StateType] | None = None,
     ) -> None:
         self._base_obs_builder = obs_builder
         self.obs_builder = ConfigurableObsBuilder(obs_builder)
@@ -49,10 +51,14 @@ class FeatureConfig(
         self._base_action_parser = action_parser
         self.action_parser = action_parser
 
-        self.shared_info_provider = ConfigurableSharedInfoProvider()
+        self.shared_info_provider = ConfigurableSharedInfoProvider(shared_info_provider)
 
 
-def create_config(obs_builder: ObsBuilder, act_parser: ActionParser) -> FeatureConfig:
+def create_config(
+    obs_builder: ObsBuilder,
+    act_parser: ActionParser,
+    shared_info_provider: SharedInfoProvider | None = None,
+) -> FeatureConfig:
     """Creates a config with your obs builder and action parser
 
     :param obs_builder: Your obs builder
@@ -62,4 +68,4 @@ def create_config(obs_builder: ObsBuilder, act_parser: ActionParser) -> FeatureC
     :return: A config where you can add features
     :rtype: FeatureConfig
     """
-    return FeatureConfig(obs_builder, act_parser)
+    return FeatureConfig(obs_builder, act_parser, shared_info_provider)

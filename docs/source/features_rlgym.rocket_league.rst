@@ -1,31 +1,41 @@
 Rocket League
 ======================================
 
-.. toctree::
-   :maxdepth: 1
+Ball related features
+---------------------
 
-   features_rlgym.rocket_league.features
+Ball
+^^^^
 
-Submodules
-----------
+.. autofunction:: features_rlgym.rocket_league.features.ball.add_ball_feature
+   :no-index:
 
-features\_rlgym.rocket\_league.config module
---------------------------------------------
+Ball prediction
+^^^^^^^^^^^^^^^
 
-.. automodule:: features_rlgym.rocket_league.config
-   :members:
-   :undoc-members:
+.. autofunction:: features_rlgym.rocket_league.features.ball_pred.add_ball_pred_feature
+   :no-index:
 
-features\_rlgym.rocket\_league.empty\_builder module
-----------------------------------------------------
+Boost related features
+----------------------
 
-.. automodule:: features_rlgym.rocket_league.empty_builder
-   :members:
-   :undoc-members:
+Boost timers
+^^^^^^^^^^^^
 
-Module contents
----------------
+.. autofunction:: features_rlgym.rocket_league.features.boost_pads.add_boost_pad_timers_feature
+   :no-index:
 
-.. automodule:: features_rlgym.rocket_league
-   :members:
-   :undoc-members:
+Car related features
+--------------------
+
+Self awareness
+^^^^^^^^^^^^^^
+
+.. autofunction:: features_rlgym.rocket_league.features.self.add_self_feature
+   :no-index:
+
+Others awareness
+^^^^^^^^^^^^^^^^
+
+.. autofunction:: features_rlgym.rocket_league.features.others.add_others_feature
+   :no-index:

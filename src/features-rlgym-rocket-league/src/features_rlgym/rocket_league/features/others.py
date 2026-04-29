@@ -140,6 +140,13 @@ def add_others_feature(
     shuffle: bool = False,
 ):
     """Adds a feature to add other cars to the obs
+    
+    Similar to the self awareness feature, 
+    this adds the following information for all other players on the field:
+    
+    * The player's position
+    * The player's velocity
+    * The player's angular velocity
 
     :param config: The config to add the feature on
     :type config: FeatureConfig
